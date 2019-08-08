@@ -1,0 +1,60 @@
+<div class="jumbotron bg-dark text-white"
+     style="padding:25px 0px">
+  <h4 class="text-center" color="black">TO-DO-LIST</h4>
+</div>
+
+
+
+<div class="row" style="padding:25px 0px">
+  <div class="column">
+    <div>
+      <!--<i class="fa fa-bars fa-2x" title="Display All To-Do Items" style="margin: 0px 55px"></i>-->
+      <button (click)="displayAllToDoListItems()" class="fa fa-bars fa-2x" title="Display All To-Do Items" style="margin: 0px 48.5px"></button>
+    </div>
+  </div>
+  <div class="column">
+    <div>
+      <!--<i class="fa fa-trash fa-2x" title="Delete To-Do Items" style="margin: 0px 55px"></i>-->
+      <!--<button (click)="deleteSelected()" class="btn-danger">DELETE ALL</button>-->
+      <button (click)="deleteSelected()" class="fa fa-trash fa-2x" title="Delete To-Do Items" style="margin: 0px 48.5px"></button>
+    </div>
+  </div>
+  <div class="column">
+    <div ng-show="myValue" class="ng-hide">
+      <!--<i class="fa fa-square fa-2x" title="Display All Incomplete To-Do Items" style="margin: 0px 50px" ></i>-->
+      <button (click)="displayIncomplete()" class="fa fa-square fa-2x" title="Display All Incomplete To-Do Items on Top" style="margin: 0px 48.5px"></button>
+    </div>
+  </div>
+  <div class="column">
+    <div ng-show="myValue">
+      <!--<i class="fa fa-check fa-2x" title="Display All Complete To-Do Items" style="margin: 0px 50px"></i>-->
+      <button (click)="displayCompleted()" class="fa fa-check fa-2x" title="Display All Complete To-Do Items on Top" style="margin: 0px 48.5px"></button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="input-group">
+  <!--<input type="text" class="form-control" #itemTitle>-->
+  <input type="text" class="form-control" #itemTitle (keyup.enter)="onAdd(itemTitle)">
+  <div class="input-group-addon hover-cursor" (click)="onAdd(itemTitle)">
+    <i class="fa fa-plus-circle fa-2x" title="Add To-Do Item"></i>
+  </div>
+</div>
+
+
+
+<div style="margin:5px 0px">
+  <ul class="list-group" style="border:25px solid double">
+    <li class="list-group-item" *ngFor="let item of toDoListArray">
+      <span class="hover-cursor" [class.text-success]="item.isChecked" (click)="alterCheck(item.$key,item.isChecked)">
+        <i class="fa fa-lg" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'" ng-show="item.isChecked"></i>
+      </span>
+      {{item.title}}
+      <span class="hover-cursor text-danger pull-right" (click)="onDelete(item.$key)">
+        <i class="fa fa-close fa-lg"></i>
+      </span>
+    </li>
+  </ul>
+</div>
